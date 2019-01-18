@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aidi.boke.dao.UserMapper">
+
+
+    <resultMap id="BaseResultMap" type="com.aidi.boke.domain.User" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+    <select id="selectUserByName" parameterType="String" resultMap="BaseResultMap">
+        SELECT * FROM user WHERE username = #{name};
+    </select>
+
+    <insert id="saveUser" parameterType="com.aidi.boke.domain.User">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select Last_INSERT_ID()
+        </selectKey>
+        insert into user(username,password) values (#{username},#{password});
+    </insert>
+
+
+    <select id="loginUser" parameterType="com.aidi.boke.domain.User" resultMap="BaseResultMap">
+
+        select * from user where username=#{username} and password=#{password};
+
+    </select>
+
+
+
+</mapper>
