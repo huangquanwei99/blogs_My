@@ -27,7 +27,7 @@ public class UploadServiceImpl implements UploadService {
     @Override
     public List<ImgBD> findByName(String username) {
         if (!StringUtils.isBlank(username)){
-            List<ImgBD> list=  imgBDMapper.findAll();
+            List<ImgBD> list=  imgBDMapper.findAll(username);
             return list;
         }
         return null;

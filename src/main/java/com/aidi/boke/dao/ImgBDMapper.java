@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface ImgBDMapper {
     //头部查询所有接口
-    List<ImgBD> findAll();
+    List<ImgBD> findAll(String username);
     //保存
     void saveOne(ImgBD imgBD);
 

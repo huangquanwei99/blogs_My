@@ -1,0 +1,83 @@
+@charset "utf-8";
+html,body,div,ul,ol,li,h1,h2,h3,h4,h5,dl,dt,dd,p,a,span,em,i,strong,input,button{
+    margin:0px;
+    padding:0px;
+}
+body{
+    width: 100%;
+    font-size:16px;
+    overflow-x: hidden;
+    /*background-color: #f4f5f9;*/
+    font-family: /*PingFang-SC-Medium*/PingFang-SC-Regular;
+    -webkit-font-smoothing: antialiased;
+    /*padding-top: 1rem;*/
+}
+ul li,dl dt dd,ol li{list-style: none;}
+a{text-decoration: none;
+/*color: #fff;*/
+-webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;}
+em,strong,i{font-style: normal;}
+button,input{outline: none;border: none;}
+
+/*浮动*/
+.fl{ float:left;}
+.fr{ float:right;}
+.fn{ float:none;}
+
+/*定位*/
+.po_re{ position:relative;}
+.po_ab{ position:absolute;}
+.po_fix{ position:fixed;}
+
+/*文字居中*/
+.font_left{text-align:left;}
+.font_cen{text-align:center;}
+.font_right{text-align:right;}
+.font_w{ font-weight:bold;}
+
+/*不换行**超出隐藏**超出显示显示省略号*/
+.font_nowrap{ white-space:nowrap; overflow:hidden;text-overflow:ellipsis;word-wrap: normal;}
+
+/*display*/
+.show_inline{display:inline-block;}
+
+/*输入框的样式*/
+.input_Style{font-family:Microsoft Yahei;color:#363636;padding-left:0.10rem;border:0.01rem solid #e8e8e8;background:#fff;border-radius:2rem;}
+
+/*手型*/
+.cur_p{cursor: pointer;}
+
+
+
+.wrapper{
+	overflow: hidden;
+	width: 100%;
+}
+.sideBar{
+	width: 200px;
+	float: left;
+}
+.conent{
+	float: left;
+	width: 80%;
+	padding: 20px;
+	box-sizing: border-box;	
+}
+.mocking{
+	background: #333333;
+	opacity: 0.7;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.addKonwledge{
+	width: 200px;
+	background: #FFFFFF;
+	position: fixed;
+	top: 0;
+	left: 0;
+}

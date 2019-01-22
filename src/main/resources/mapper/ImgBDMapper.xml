@@ -9,11 +9,12 @@
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="sort" property="sort" jdbcType="INTEGER"/>
         <result column="img_class" property="imgClass" jdbcType="INTEGER"/>
+        <result column="state" property="state" jdbcType="INTEGER"/>
     </resultMap>
 
 
-    <select id="findAll" resultMap="BaseResultMap">
-        select * from Img_db;
+    <select id="findAll"  parameterType="String" resultMap="BaseResultMap">
+        SELECT id,img_name,img_address,username,sort,img_class,state FROM img_db WHERE username=#{username};
     </select>
 
     <insert id="saveOne" parameterType="com.aidi.boke.domain.ImgBD">

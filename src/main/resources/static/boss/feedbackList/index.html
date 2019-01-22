@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的文件列表</title>
+		<link rel="stylesheet" type="text/css" href="css/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="css/icon.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="css/pubilc.css"/>
+		<script src="js/jquery-2.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+    <style type="text/css">
+    	/*.easyui-window ul{
+    		float: left;
+    	}*/
+        .easyui-window ul li{
+        	margin: 20px;
+        	/*padding: 40px;*/
+        	/*float: left;*/
+        }
+        .easyui-window ul li label{
+        	/*padding: 40px;*/
+        	margin: 60px;
+        	font-size: 21px;
+        	/*float: left;*/
+        }
+        #tp{
+        	margin-top: 20px;
+        }
+        .lookup{
+            padding:30px ;
+            font-size: 20px;
+        }
+        #lookname{
+        	border: 1px solid #4D4D4D;
+        	width: 200px;
+        	height: 30px;
+        	font-size: 20px;
+        }
+        #button{
+        	margin-left: 20px;
+        	width: 70px;
+        	height: 30px;
+        	border-radius: 5px;
+        	background-color: #95B8E7;
+        }
+    </style>
+	<body>
+    <div id="win" class="easyui-window" title="My Window" closed="true" style="width:900px;height:700px;padding:5px;">
+    	<ul>
+			<li>
+				<label>序号：<span id="id"></span></label>
+			</li>
+    		<li>
+    			<label>用户名：<span id="username"></span></label>
+    		</li>
+    		<li>
+    			<label>文件名称<span id="imgName"></span></label>
+    		</li>
+			<li>
+				<label>文件下载<span id="imgAddress"></span></label>
+			</li>
+			<li>
+				<label>是否有效<span id="state"></span></label>
+			</li>
+    	</ul>
+    </div>
+    <!--<button onclick="f()"></button>-->
+		<!--<div></div>-->
+		<ul class="lookup">
+			<li>
+				<label>姓名：<input type="text" value="" id="lookname"/></label>
+			    <input type="button" name="button" id="button" value="查找" />
+			</li>
+			
+		</ul>
+		<table id="dg" title="我的文件列表" style="width:98%;" data-options="
+    				rownumbers:true,
+    				singleSelect:true,
+    				autoRowHeight:false,
+    				pagination:true,
+    				pageSize:20">
+			<thead>
+				<tr>
+					<th field="id" width="170">序号</th>
+					<th field="username" width="150">用户名</th>
+					<th field="imgName" width="150">文件名称</th>
+					<th field="imgAddress" width="150">文件下载</th>
+					<th field="state" width="150">是否有效</th>
+					<th field="note1" width="200" align="center">操作</th>
+				</tr>
+			</thead>
+		</table>
+		<script>
+			//查询
+			var outname;
+			$("#button").bind('click',function(){
+				var lookname=$("#lookname").val();
+				outname=lookname;
+				$('#dg').datagrid({
+					loadFilter: pagerFilter
+				}).datagrid('loadData', getData(outname));
+			})
+
+			//复用查询接口 参数类型String outname:用户名
+			function getData(outname) {
+				var rows = [];
+				$.ajax({
+					type: "post",
+					url: "http://www.chushengdaodeaidi.top/findByName",
+					data:{
+						'username':outname,
+					},
+					async: false,
+					success: function(data) {
+						console.log(data);
+						if(data.code == 200) {
+							var json = data.list;
+							for(var i in json) {
+								var userJson = json[i];
+								rows.push({
+									id: userJson['id'],
+                                    username: userJson['username'],
+                                    imgName: userJson['imgName'],
+                                    imgAddress: userJson['imgAddress'],
+                                    state: userJson['state'],
+								});
+							}
+						}
+					}
+				});
+				return rows;
+			}
+			
+			function f(id,username,imgName,imgAddress,state){
+				$('#win').window('open');
+				$('#id').text(id);
+				$('#username').text(username);
+				$('#imgName').text(imgName);
+				$("#imgAddress").text(imgAddress);
+				$("#state").text(state);
+			}
+			function pagerFilter(list) {
+				if(typeof list.length == 'number' && typeof list.splice == 'function') { // is array
+                    list = {
+						total: list.length,
+						rows: list,
+					}
+				}
+				var dg = $(this);
+				var opts = dg.datagrid('options');
+				var pager = dg.datagrid('getPager');
+				pager.pagination({
+					onSelectPage: function(pageNum, pageSize) {
+						opts.pageNumber = pageNum;
+						opts.pageSize = pageSize;
+						pager.pagination('refresh', {
+							pageNumber: pageNum,
+							pageSize: pageSize
+						});
+						dg.datagrid('loadData', list);
+					}
+				});
+				if(!list.originalRows) {
+                    list.originalRows = (list.rows);
+				}
+				var start = (opts.pageNumber - 1) * parseInt(opts.pageSize);
+				var end = start + parseInt(opts.pageSize);
+                list.rows = (list.originalRows.slice(start, end));
+				return list;
+			}
+
+			// 页面加载函数
+			$(function() {
+				$('#dg').datagrid({
+					loadFilter: pagerFilter
+				}).datagrid('loadData', getData());
+			});
+		</script>
+	</body>
+
+</html>

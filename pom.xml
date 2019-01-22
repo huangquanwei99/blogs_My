@@ -168,7 +168,7 @@
                             <descriptors>
                                 <descriptor>assembly/test.xml</descriptor>
                             </descriptors>
-                            <finalName>huang-test</finalName>
+                            <finalName>blogs-test</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
                         </configuration>
                         <phase>package</phase>
@@ -189,7 +189,7 @@
                             <descriptors>
                                 <descriptor>assembly/release.xml</descriptor>
                             </descriptors>
-                            <finalName>huang-production</finalName>
+                            <finalName>blogs-production</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
                         </configuration>
                         <phase>package</phase>
