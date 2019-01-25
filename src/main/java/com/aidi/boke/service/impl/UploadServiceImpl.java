@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,14 +26,14 @@ public class UploadServiceImpl implements UploadService {
      * @return
      */
     @Override
-    public List<ImgBD> findByName(String username) {
-        if (!StringUtils.isBlank(username)){
-            List<ImgBD> list=  imgBDMapper.findAll(username);
+    public List<ImgBD> findByName(ImgBD imgBD) {
+        List<ImgBD> list = new ArrayList<>();
+        if (!StringUtils.isBlank(imgBD.getUsername())){
+            list=  imgBDMapper.findAll(imgBD);
             return list;
         }
-        return null;
+        return list;
     }
-
     /**
      *
      * @param username 用户名

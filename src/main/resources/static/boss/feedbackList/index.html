@@ -61,7 +61,7 @@
     			<label>文件名称<span id="imgName"></span></label>
     		</li>
 			<li>
-				<label>文件下载<span id="imgAddress"></span></label>
+				<label>文件下载<a id="imgAddress" href=""></a></label>
 			</li>
 			<li>
 				<label>是否有效<span id="state"></span></label>
@@ -74,10 +74,11 @@
 			<li>
 				<label>姓名：<input type="text" value="" id="lookname"/></label>
 			    <input type="button" name="button" id="button" value="查找" />
+				<a href="http://www.jeasyui.net">EasyUI 中文网</a>
 			</li>
 			
 		</ul>
-		<table id="dg" title="我的文件列表" style="width:98%;" data-options="
+		<table id="dg" title="通过用户名查看我的文件列表" style="width:98%;" data-options="
     				rownumbers:true,
     				singleSelect:true,
     				autoRowHeight:false,
@@ -85,12 +86,12 @@
     				pageSize:20">
 			<thead>
 				<tr>
-					<th field="id" width="170">序号</th>
-					<th field="username" width="150">用户名</th>
-					<th field="imgName" width="150">文件名称</th>
-					<th field="imgAddress" width="150">文件下载</th>
-					<th field="state" width="150">是否有效</th>
-					<th field="note1" width="200" align="center">操作</th>
+					<th field="id" width="190">文件号</th>
+					<th field="username" width="190">用户名</th>
+					<th field="imgName" width="190">文件名称</th>
+					<th field="imgAddress" width="500">文件下载地址</th>
+					<th field="state" width="190">是否有效</th>
+					<th field="note1" width="190" align="center">操作</th>
 				</tr>
 			</thead>
 		</table>

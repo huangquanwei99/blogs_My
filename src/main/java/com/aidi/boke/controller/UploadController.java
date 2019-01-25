@@ -71,6 +71,7 @@ public class UploadController {
         }
         //判断前段传的照片是否为空
         if (originalFilename !=null && originalFilename!=""){
+            log.info(originalFilename+"文件保存文件开始>>>>"+System.currentTimeMillis());
             System.out.println(originalFilename);
             String extName=originalFilename.substring( originalFilename.lastIndexOf(".")+1);//得到扩展名
             System.out.println(extName);
@@ -81,7 +82,7 @@ public class UploadController {
                 System.out.println(username);
                 boolean bl = uploadService.saveOne(username,originalFilename,extName,url);
                 if (bl){
-                    log.info("用户>>>"+username+"<<<保存文件"+originalFilename+"成功");
+                    log.info("用户>>>"+username+"<<<保存文件>>>"+originalFilename+"结束>>>>"+System.currentTimeMillis());
                     return new Result(true, url);
                 }
                 return new Result(false, "保存失败");
@@ -111,9 +112,9 @@ public class UploadController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username",value = "用户名",dataType = "String")
     })
-    public Map findByName(String username) {
+    public Map findByName(ImgBD imgBD) {
         Map map = new HashMap();
-        List<ImgBD> list  = uploadService.findByName(username);
+        List<ImgBD> list  = uploadService.findByName(imgBD);
         map.put("code",200);
         map.put("msg","查询成功");
         map.put("list",list);

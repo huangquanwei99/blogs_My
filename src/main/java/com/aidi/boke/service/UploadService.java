@@ -10,7 +10,7 @@ import java.util.List;
 public interface UploadService {
 
     // 查询用户所有列表
-    List<ImgBD> findByName(String username);
+    List<ImgBD> findByName(ImgBD imgBD);
     //保存
     boolean saveOne(String username, String originalFilename, String extName ,String url);
 }
